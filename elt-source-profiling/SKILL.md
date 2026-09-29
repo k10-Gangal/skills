@@ -1,6 +1,6 @@
 ---
 name: elt-source-profiling
-description: Profile source tables in a Postgres schema before writing transformation SQL. Use at the start of every database, before building any data model, when a task supplies a target spec and asks for data models. Establishes each model's grain and expected row count, mines column meanings from describe_table, picks join keys that will not fan out, and holds exploration inside a fixed budget.
+description: Profile source tables in a Postgres schema before writing transformation SQL. Use at the start of every database and before building any data model - whether the task hands you a target spec or you must first propose one and agree it with whoever asked. Establishes each model's grain and expected row count, mines column meanings from describe_table, picks join keys that will not fan out, and holds exploration inside a fixed budget.
 ---
 
 # Source profiling
@@ -16,12 +16,18 @@ in exploration earns anything.
 
 ## Where the target spec is
 
-**In your task prompt, and nowhere else.** No tool returns it. Do not spend a call
-looking for it.
+**In your task prompt, or nowhere yet.** No tool returns it either way, so do not spend a
+call looking for it.
+
+If the prompt carries a spec, it is complete and final — build exactly that. If it does
+not, there is nothing to hunt for: you are being asked to propose the models, and this
+profiling is the raw material for that proposal. Answer the three questions above first,
+then follow your task prompt on how to propose a model and agree it before you create
+anything.
 
 `describe_table` gives you descriptions of *source* columns — what the inputs mean. It
-never tells you what an output column should be called or what it should contain. Those
-come only from the spec in your prompt.
+never tells you what an output column should be called or what it should contain. That
+comes only from the spec, or from what you agree with whoever asked for the work.
 
 ## The exploration budget
 

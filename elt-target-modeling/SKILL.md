@@ -291,9 +291,10 @@ create_data_model(replace=True)  →  Gate A  →  Gate B  →  Gate C
 
 ## Finishing
 
-- No human will answer a question. Where the spec is ambiguous, pick the reading that
-  satisfies the grain sentence and the most column descriptions, state the assumption in
-  one line, and continue.
+- Where the spec is ambiguous, pick the reading that satisfies the grain sentence and the
+  most column descriptions, state the assumption in one line, and continue. Ask instead
+  only if your task prompt says someone is available to answer — if it is silent on that,
+  assume nobody is, and decide rather than stall.
 - Before stopping, call `list_data_models(database)` once and confirm every model in the
   spec exists. A model that was never created can never score; an imperfect one still
   might.
