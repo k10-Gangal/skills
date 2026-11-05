@@ -3,17 +3,18 @@
 > Project defaults. The user or an existing project pattern overrides these —
 > ask the user how their existing models are named and follow that.
 
-## Layers
+## One model per question
 
 ```
-  staging.stg_<source>      1:1 with a source table. cast, rename, light clean.
-                            kind VIEW. no joins, no aggregates.
-  marts.<subject>_<grain>   business logic. joins, aggregates.
-                            reads staging.*, never raw sources.
+  analytics.<subject>_<grain>   one model, one query. reads source tables
+                                directly. intermediate steps are CTEs.
+                                select only the columns the question needs.
 ```
 
-Build staging before marts. Reuse an existing staging model instead of adding a
-second one over the same source.
+No staging, intermediate or marts layers. Every extra model is another
+validation, and `validate` would have to receive every upstream model's SQL
+again. Add a separate staging model only when the user explicitly asks for a
+reusable layer.
 
 ## Names
 
@@ -30,17 +31,10 @@ second one over the same source.
 
 Name a mart for its grain: `revenue_by_region_month`, `customer_daily`.
 
-## Files
+## Output
 
-One model per file, named after the model without its schema:
-
-```
-  models/staging/stg_orders.sql
-  models/marts/revenue_by_region.sql
-```
-
-The path is convention only: the MODEL `name` is the real name (unless the
-project sets `infer_names`). Keep the two in sync.
+The answer is a fenced ```sql code block in the reply — never a file, never a
+file path. The person saves it where their project wants it.
 
 ## Every model has
 
