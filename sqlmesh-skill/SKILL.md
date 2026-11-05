@@ -18,7 +18,7 @@ Facts only. How to behave is in `agent.md`. Read **one** file — the one you ne
 | Plan, apply, environments, change categories, forward-only, restatement, janitor | `references/plans-envs.md` |
 | Linter rules — which error, which warn | `references/linter.md` |
 | Engine / dialect rules — read the file `list_tables` names in `engine_reference` | `references/engines/<dialect>.md` (postgres, bigquery) |
-| Naming and layering | `references/conventions.md` |
+| Naming, the one-model rule, output format | `references/conventions.md` |
 | Validation error → cause → fix | `references/errors.md` |
 
 Every file states what it was checked against. If something here contradicts
